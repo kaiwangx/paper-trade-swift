@@ -34,7 +34,7 @@ class CompanyDetailVM: ObservableObject {
                 self.description = data
                 self.updateLoadingState()
             case let .failure(error):
-                print(error.localizedDescription)
+                print("Error: \(error.localizedDescription)")
             }
         }
     }
@@ -46,7 +46,7 @@ class CompanyDetailVM: ObservableObject {
                 self.price = data
                 self.updateLoadingState()
             case let .failure(error):
-                print(error.localizedDescription)
+                print("Error: \(error.localizedDescription)")
             }
         }
     }
@@ -58,7 +58,7 @@ class CompanyDetailVM: ObservableObject {
                 self.peers = data
                 self.updateLoadingState()
             case let .failure(error):
-                print(error.localizedDescription)
+                print("Error: \(error.localizedDescription)")
             }
         }
     }
@@ -67,11 +67,10 @@ class CompanyDetailVM: ObservableObject {
         AF.request("\(serverURL)/social_sentiment/\(ticker)").validate().responseDecodable(of: SocialSentiment.self) { response in
             switch response.result {
             case let .success(data):
-                print(data)
                 self.socialSentiment = data
                 self.updateLoadingState()
             case let .failure(error):
-                print(error.localizedDescription)
+                print("Error: \(error.localizedDescription)")
             }
         }
     }
@@ -88,7 +87,7 @@ class CompanyDetailVM: ObservableObject {
                 self.newsList = filterNews
                 self.updateLoadingState()
             case let .failure(error):
-                print(error.localizedDescription)
+                print("Error: \(error.localizedDescription)")
             }
         }
     }

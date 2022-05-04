@@ -27,6 +27,7 @@ struct CompanyNews: View {
                 VStack(alignment: .leading){
                     KFImage(URL(string: self.companyDetailVM.newsList![0].image))
                         .resizable()
+                        .aspectRatio(contentMode: .fill)
                         .frame(height: 200)
                         .cornerRadius(15)
 
@@ -83,7 +84,7 @@ struct CompanyNews: View {
     
     func toggleNewsSheet(_ newsItem: NewsItem) {
         self.selectedNewsItemVM.selectNews(anotherNewsItem: newsItem)
-        self.isShowingSheet = true
+        self.isShowingSheet.toggle()
         
     }
 }

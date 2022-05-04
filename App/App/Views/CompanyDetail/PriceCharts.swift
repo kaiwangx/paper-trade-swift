@@ -16,12 +16,14 @@ struct PriceCharts: View {
                     Image(systemName: "chart.xyaxis.line")
                     Text("Hourly")
                 }
+                .frame(height: 450)
             
             Chart(name: "Historical", ticker: self.ticker)
                 .tabItem {
                     Image(systemName: "clock")
                     Text("Historical")
                 }
+                .frame(height: 450)
         }
     }
 }

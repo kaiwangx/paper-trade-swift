@@ -20,11 +20,14 @@ class SearchBar: NSObject, ObservableObject {
 extension SearchBar: UISearchResultsUpdating {
    
     func updateSearchResults(for searchController: UISearchController) {
-        
-        // Publish search bar text changes.
-        if let searchBarText = searchController.searchBar.text {
-            self.text = searchBarText
-        }
+        let debouncer = Debouncer(delay: 1)
+        debouncer.run(action: {
+            // Publish search bar text changes.
+            if let searchBarText = searchController.searchBar.text {
+                self.text = searchBarText
+            }
+        })
+
     }
 }
 

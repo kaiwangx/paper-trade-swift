@@ -10,27 +10,36 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var searchBar: SearchBar = SearchBar()
     @ObservedObject var tickerAutocompleteVM: TickerAutocompleteVM = TickerAutocompleteVM()
+    @AppStorage("favorites") var favoritesLocalStorageList: [TickerLocalStorageItem] = []
     let dateFormatter = DateFormatter()
-    var calendar = Calendar.current
     let date = Date()
 
     var body: some View {
         
         NavigationView {
             if searchBar.text.isEmpty {
-                VStack {
-                    Text(Date(), style: .date)
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.gray)
+                List {
+                    Today()
+                    PortfolioList()
+                    FavoritesList()
+                    Footer()
                 }
                 .navigationTitle("Stocks")
                 .add(searchBar)
+                .toolbar {
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        EditButton()
+                    }
+                }
             } else {
                 AutocompleteList(tickerAutocompleteList: tickerAutocompleteVM.tickerAutocompleteList)
-                .onChange(of: searchBar.text) {
-                    tickerAutocompleteVM.fetchTickerAutocompleteList($0)
-                }
+                    .onReceive(searchBar.$text, perform: { ticker in
+                        if ticker != "" {
+                            tickerAutocompleteVM.fetchTickerAutocompleteList(ticker)
+                        } else {
+                            tickerAutocompleteVM.reset()
+                        }
+                    })
             }
         }
     }

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, shrink-to-fit=YES">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/data.js"></script>
+<script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/stock/indicators/indicators.js"></script>
+<script src="https://code.highcharts.com/stock/indicators/volume-by-price.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<div id="container"></div>
+<script>
+    // loadHighChart('TSLA', 'http://localhost:8080')
+    async function loadHighChart(ticker, url) {
+        const lastTimeStamp = await fetch(`${url}/latest_price/${ticker}`)
+            .then(response => response.json())
+            .then(response => {return response["t"]})
+        const t = dayjs.unix(lastTimeStamp)
+        const f = t.subtract(6, 'hour').unix()
+        url = `${url}/historical_data/${ticker}/5/${f}/${t.unix()}`
+
+        console.log(url)
+        fetch(url, {method: 'GET'})
+            .then(response => response.json())
+            .then(response => {
+                console.log(response)
+                const dates = response["t"]
+                const prices = response["c"]
+                const open = response["o"]
+
+                let hourlyData = []
+                const dataLength = dates.length
+
+                for (let i = 0; i < dataLength; i++) {
+                    hourlyData.push([(dayjs.unix(dates[i]).subtract(7, 'hours')).valueOf(), prices[i]])
+                }
+
+                let color = 'gray'
+                if (open[0] - prices[dataLength - 1] > 0) {
+                    color = 'red'
+                } else if (open[0] - prices[dataLength - 1] < 0) {
+                    color = 'green'
+                }
+
+                // create the chart
+                Highcharts.stockChart('container', {
+                    title: {
+                        text: `${ticker} Hourly Price Variation`,
+                        style: {color: 'gray'},
+                    },
+
+                    navigator: {
+                        enabled: false,
+                    },
+
+                    rangeSelector: {
+                        enabled: false,
+                    },
+
+                    series: [{
+                        name: ticker,
+                        data: hourlyData,
+                        type: 'line',
+                        color: color,
+                        tooltip: {
+                            valueDecimals: 2
+                        }
+                    }]
+                });
+            })
+    }
+</script>
+</html>

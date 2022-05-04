@@ -19,9 +19,17 @@ struct Insights: View {
             }
             
             HStack {
+                Spacer()
+                Text("Social Sentiments")
+                    .font(.title2)
+                    .padding(.bottom, 3)
+                Spacer()
+            }
+            
+            HStack {
                 VStack(alignment: .leading) {
                     Divider()
-                    Text("**\(self.companyDetailVM.description!.ticker)**")
+                    Text("**\(self.companyDetailVM.description!.name)**")
                     Divider()
                     Text("**Total   Mentions**")
                     Divider()
@@ -61,6 +69,7 @@ struct Insights: View {
             }
             
             Chart(name: "RecommendationTrends", ticker: self.companyDetailVM.description!.ticker)
+                .padding(.top)
                 .frame(height: 450)
             
             Chart(name: "HistoricalEPS", ticker: self.companyDetailVM.description!.ticker)

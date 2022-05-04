@@ -37,7 +37,7 @@ struct NewsItem: Decodable, Identifiable{
     }
     
     var twitterShareLink: URL {
-        return URL(string: replaceSpace("https://twitter.com/intent/tweet?text=\(headline)%0A\(url)"))!
+        return URL(string: replaceSpace("https://twitter.com/intent/tweet?text=\(headline)") + "%0A" + replaceSpace("\(url)"))!
     }
     
     func replaceSpace(_ path: String) -> String {

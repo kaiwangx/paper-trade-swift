@@ -18,15 +18,15 @@ struct Stats: View {
             }
             HStack {
                 VStack(alignment: .leading) {
-                    Text("**High Price**: \(self.price.high, specifier: "%.2f")")
+                    Text("**High Price**: $\(self.price.high, specifier: "%.2f")")
                         .padding(.bottom, 3)
-                    Text("**Low Price**: \(self.price.low, specifier: "%.2f")")
+                    Text("**Low Price**: $\(self.price.low, specifier: "%.2f")")
                 }
                 .padding(.trailing)
                 VStack(alignment: .leading) {
-                    Text("**Open Price**: \(self.price.open, specifier: "%.2f")")
+                    Text("**Open Price**: $\(self.price.open, specifier: "%.2f")")
                         .padding(.bottom, 3)
-                    Text("**Prev. Close**: \(self.price.previousClose, specifier: "%.2f")")
+                    Text("**Prev. Close**: $\(self.price.previousClose, specifier: "%.2f")")
                 }
                 Spacer()
             }

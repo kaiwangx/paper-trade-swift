@@ -10,7 +10,7 @@ import Alamofire
 import SwiftyJSON
 
 class TickerAutocompleteVM: ObservableObject {
-    @Published var tickerAutocompleteList = [AutoCompleteItem]()
+    @Published var tickerAutocompleteList: [AutoCompleteItem] = [AutoCompleteItem]()
     
     func fetchTickerAutocompleteList(_ ticker: String) {
         AF.request("\(serverURL)/autocomplete/\(ticker)").validate().responseDecodable(of: [AutoCompleteItem].self) { response in
@@ -21,5 +21,9 @@ class TickerAutocompleteVM: ObservableObject {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func reset() {
+        tickerAutocompleteList = []
     }
 }

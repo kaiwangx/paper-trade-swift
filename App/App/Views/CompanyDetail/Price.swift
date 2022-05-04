@@ -19,15 +19,9 @@ struct Price: View {
                 self.companyDetailVM.price!.trend.img
                 Text("$\(self.companyDetailVM.price!.change, specifier: "%.2f") (\(self.companyDetailVM.price!.percentageChange, specifier: "%.2f")%)")
             }
-                .font(.title2)
-                .foregroundColor(self.companyDetailVM.price!.trend.color)
+            .font(.headline)
+            .foregroundColor(self.companyDetailVM.price!.trend.color)
             Spacer()
         }
-    }
-}
-
-struct Price_Previews: PreviewProvider {
-    static var previews: some View {
-        Price()
     }
 }

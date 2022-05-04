@@ -35,6 +35,7 @@ struct Chart: View {
                     }
             }
             .navigationBarTitle(title)
+            .navigationBarHidden(true)
         }
     }
 }

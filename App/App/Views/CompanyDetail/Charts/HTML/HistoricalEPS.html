@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, shrink-to-fit=YES">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+<div id="container"></div>
+<script>
+    loadHighChart('TSLA', 'http://localhost:8080')
+    function loadHighChart(ticker, url) {
+        url = `${url}/earnings/${ticker}`
+
+        fetch(url, {method: 'GET'})
+            .then(response => response.json())
+            .then(response => {
+                let dates = []
+                let actualEarnings = []
+                let estimatedEarnings = []
+                const dataLength = response.length
+
+                for (let i = 0; i < dataLength; i++) {
+                    dates.push(`${response[i]["period"]} <br>Surprise: ${response[i]["surprise"]}`)
+                    actualEarnings.push(response[i]["actual"] || 0)
+                    estimatedEarnings.push(response[i]["estimate"] || 0)
+                }
+
+                // create the chart
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'spline'
+                    },
+                    title: {
+                        text: 'Historical EPS Surprises'
+                    },
+                    xAxis: {
+                        categories: dates
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Quarterly EPS'
+                        }
+                    },
+                    tooltip: {
+                        shared: true
+                    },
+                    plotOptions: {
+                        spline: {
+                            marker: {
+                                radius: 4,
+                                lineColor: '#666666',
+                                lineWidth: 1
+                            }
+                        }
+                    },
+                    series: [{
+                        type: 'spline',
+                        name: 'Estimate',
+                        data: estimatedEarnings
+                    }, {
+                        type: 'spline',
+                        name: 'Actual',
+                        data: actualEarnings,
+                    }]
+                });
+            })
+    }
+</script>
+</html>
