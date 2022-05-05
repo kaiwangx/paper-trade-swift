@@ -24,6 +24,6 @@ class TickerAutocompleteVM: ObservableObject {
     }
     
     func reset() {
-        tickerAutocompleteList = []
+        tickerAutocompleteList = [AutoCompleteItem]()
     }
 }

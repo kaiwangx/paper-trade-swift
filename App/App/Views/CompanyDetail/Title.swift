@@ -17,7 +17,8 @@ struct Title: View {
             Spacer()
             KFImage(URL(string: self.companyDetailVM.description!.logo))
                 .resizable()
-                .frame(width: 50, height: 50)
+                .frame(width: 40, height: 40)
+                .cornerRadius(10)
         }
     }
 }

@@ -7,5 +7,4 @@
 
 import Foundation
 
-//let serverURL: String = "https://paper-trade-nodejs.wl.r.appspot.com"
-let serverURL: String = "http://localhost:8080"
+let serverURL: String = "https://paper-trade-nodejs.wl.r.appspot.com"

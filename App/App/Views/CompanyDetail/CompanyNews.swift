@@ -25,11 +25,14 @@ struct CompanyNews: View {
             if self.companyDetailVM.newsList != nil && self.companyDetailVM.newsList!.count >= 1{
             
                 VStack(alignment: .leading){
+                    
+
                     KFImage(URL(string: self.companyDetailVM.newsList![0].image))
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(height: 200)
+                        .frame(maxWidth: .infinity)
                         .cornerRadius(15)
+                    
 
                     Text("**\(self.companyDetailVM.newsList![0].source)**  \(self.companyDetailVM.newsList![0].timeSincePublished)")
                         .font(.callout)

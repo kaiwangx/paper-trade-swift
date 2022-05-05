@@ -10,7 +10,7 @@ import SwiftUI
 struct FavoritesList: View {
 //    @Environment(\.favorites) private var favoritesLocalStorageList: [TickerLocalStorageItem]
     @AppStorage("favorites") var favoritesLocalStorageList: [TickerLocalStorageItem] = []
-    @ObservedObject var tickerAutoUpdateVM: TickerAutoUpdateListVM = TickerAutoUpdateListVM()
+    @ObservedObject var tickerAutoUpdateVM: TickerAutoUpdateDictVM = TickerAutoUpdateDictVM()
     
     init() {
         self.tickerAutoUpdateVM.set(self.favoritesLocalStorageList)
@@ -20,28 +20,29 @@ struct FavoritesList: View {
         
         
         Section {
-            VStack {
-                Button("Check local storage") {
-                    print(self.favoritesLocalStorageList)
-                }
-            }
-            
-            VStack {
-                Button("Reset") {
-                    favoritesLocalStorageList.removeAll()
-                }
-            }
+//            VStack {
+//                Button("Check local storage") {
+//                    print(self.favoritesLocalStorageList)
+//                }
+//            }
+//
+//            VStack {
+//                Button("Reset") {
+//                    favoritesLocalStorageList.removeAll()
+//                }
+//            }
 
-            if (tickerAutoUpdateVM.tickerList.count == 0) {
+            if (tickerAutoUpdateVM.tickerDict.count == 0) {
 //                Text("Your favorites list is empty")
             } else {
-                ForEach(tickerAutoUpdateVM.tickerList) { item in
+                ForEach(favoritesLocalStorageList) { item in
                     NavigationLink {
-                        LazyView(CompanyDetail(ticker: item.portfolioLocalStorageItem.ticker))
+                        LazyView(CompanyDetail(ticker: item.ticker))
                     } label: {
-                        FavoritesRow(favoritesItem: item)
+                        FavoritesRow(favoritesItem: self.tickerAutoUpdateVM.tickerDict[item.ticker]!)
                     }
                 }
+                .onDelete(perform: removeRows)
                 .onMove(perform: move)
                 .onChange(of: favoritesLocalStorageList) { newFavoritesLocalStorageList in
                     self.tickerAutoUpdateVM.set(self.favoritesLocalStorageList)
@@ -53,6 +54,10 @@ struct FavoritesList: View {
     }
     func move(from source: IndexSet, to destination: Int) {
         favoritesLocalStorageList.move(fromOffsets: source, toOffset: destination)
+    }
+    
+    func removeRows(at offsets: IndexSet) {
+        favoritesLocalStorageList.remove(atOffsets: offsets)
     }
 }
 

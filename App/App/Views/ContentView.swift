@@ -17,30 +17,35 @@ struct ContentView: View {
     var body: some View {
         
         NavigationView {
-            if searchBar.text.isEmpty {
-                List {
-                    Today()
-                    PortfolioList()
-                    FavoritesList()
-                    Footer()
-                }
-                .navigationTitle("Stocks")
-                .add(searchBar)
-                .toolbar {
-                    ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        EditButton()
+            Group {
+                if searchBar.text.isEmpty {
+                    List {
+                        Today()
+                        PortfolioList()
+                        FavoritesList()
+                        Footer()
                     }
-                }
-            } else {
-                AutocompleteList(tickerAutocompleteList: tickerAutocompleteVM.tickerAutocompleteList)
-                    .onReceive(searchBar.$text, perform: { ticker in
-                        if ticker != "" {
-                            tickerAutocompleteVM.fetchTickerAutocompleteList(ticker)
-                        } else {
-                            tickerAutocompleteVM.reset()
+                    
+                    .add(searchBar)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .navigationBarTrailing) {
+                            EditButton()
                         }
-                    })
+                    }
+                    .onAppear {
+                        tickerAutocompleteVM.reset()
+                    }
+                } else {
+                    AutocompleteList(tickerAutocompleteList: tickerAutocompleteVM.tickerAutocompleteList)
+                        .onReceive(searchBar.$text.debounce(for: .seconds(1), scheduler: DispatchQueue.main)) {
+                            if $0 != "" {
+                                tickerAutocompleteVM.reset()
+                                tickerAutocompleteVM.fetchTickerAutocompleteList($0)
+                            }
+                        }
+                }
             }
+            .navigationTitle("Stocks")
         }
     }
 }

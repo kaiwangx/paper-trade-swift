@@ -22,7 +22,7 @@ struct CompanyDetail: View {
     
     var body: some View {
 
-        if self.companyDetailVM.isLoading {
+        if self.companyDetailVM.numCompletedFetched < self.companyDetailVM.numFetches {
             Spinner()
         } else {
             ScrollView{
@@ -34,22 +34,22 @@ struct CompanyDetail: View {
                         .padding(.horizontal)
                     
                     PriceCharts(ticker: self.ticker)
-                        .frame(height: 480)
+                        .frame(height: 440)
                 
                     Portfolio(ticker: self.ticker)
                         .padding(.horizontal)
                         .padding(.top)
-                        .font(.callout)
+                        .font(.caption)
                     
                     Stats(price: self.companyDetailVM.price!)
                         .padding(.horizontal)
                         .padding(.top)
-                        .font(.callout)
+                        .font(.caption)
                     
                     About()
                         .padding(.horizontal)
                         .padding(.top)
-                        .font(.callout)
+                        .font(.caption)
 
                     Insights()
                         .padding(.horizontal)

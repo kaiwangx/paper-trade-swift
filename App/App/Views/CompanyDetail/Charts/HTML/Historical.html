@@ -37,13 +37,13 @@
                 const dataLength = dates.length
 
                 // set the allowed units for data grouping
-                let groupingUnits = [[
-                    'week',                         // unit name
-                    [1]                             // allowed multiples
-                ], [
-                    'month',
-                    [1, 2, 3, 4, 6]
-                ]]
+                // let groupingUnits = [[
+                //     'week',                         // unit name
+                //     [1]                             // allowed multiples
+                // ], [
+                //     'month',
+                //     [1, 2, 3, 4, 6]
+                // ]]
 
                 for (let i = 0; i < dataLength; i += 1) {
                     const date = dayjs.unix(dates[i]).valueOf()
@@ -109,13 +109,13 @@
                         split: true
                     },
 
-                    plotOptions: {
-                      series: {
-                        dataGrouping: {
-                          units: groupingUnits
-                        }
-                      }
-                    },
+                    // plotOptions: {
+                    //   series: {
+                    //     dataGrouping: {
+                    //       units: groupingUnits
+                    //     }
+                    //   }
+                    // },
 
                     series: [{
                         type: 'candlestick',

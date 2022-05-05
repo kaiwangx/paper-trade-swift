@@ -68,6 +68,7 @@ struct TradeSheet: View {
                 HStack {
                     Spacer()
                     Text("x $\(self.companyDetailVM.price!.current, specifier: "%.2f")/share = $\((self.numOfShare == "" ? Double(0) : self.companyDetailVM.price!.current * Double(self.numOfShare)!), specifier: "%.2f")")
+                        .font(.callout)
                 }
                 
                 

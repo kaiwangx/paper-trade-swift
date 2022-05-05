@@ -14,7 +14,7 @@ struct About: View {
         VStack(alignment: .leading){
             HStack{
                 Text("About")
-                    .font(.title)
+                    .font(.system(size: 23.0))
                     .padding(.bottom, 5)
             }
             HStack {
@@ -33,8 +33,11 @@ struct About: View {
                         .padding(.bottom, 3)
                     Text(self.companyDetailVM.description!.finnhubIndustry)
                         .padding(.bottom, 3)
+                    HStack{
                     Link(self.companyDetailVM.description!.weburl, destination: URL(string: self.companyDetailVM.description!.weburl)!)
-                        .padding(.bottom, 3)
+                            .padding(.bottom, 3)
+                            .lineLimit(1)
+                    }
                     ScrollView(.horizontal) {
                         HStack{
                             ForEach(self.companyDetailVM.peers!, id: \.self) { peer in

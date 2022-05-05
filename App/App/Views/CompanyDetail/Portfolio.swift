@@ -12,21 +12,31 @@ struct Portfolio: View {
     @State private var isShowingSheet = false
     @AppStorage("portfolio") var portfolioLocalStorageList: [TickerLocalStorageItem] = []
     @EnvironmentObject var companyDetailVM: CompanyDetailVM
+    
     var body: some View {
         VStack(alignment: .leading){
             Text("Portfolio")
-                .font(.title)
+                .font(.system(size: 23.0))
+//                .fontWeight(.semibold)
                 .padding(.bottom, 5)
             HStack(alignment: .center) {
                 VStack(alignment: .leading){
                     
                     if let row = portfolioLocalStorageList.firstIndex(where: {$0.ticker == self.ticker}){
-                        
-                        Text("**Shares Owned**: \(portfolioLocalStorageList[row].numOfShares)").padding(.bottom, 3)
-                        Text("**Avg. Cost / Share:** $\(portfolioLocalStorageList[row].avgCost, specifier: "%.2f")").padding(.bottom, 3)
-                        Text("**Total Cost**: $\(portfolioLocalStorageList[row].avgCost * Double(portfolioLocalStorageList[row].numOfShares), specifier: "%.2f")").padding(.bottom, 3)
-                        Text("**Change**: $\((self.companyDetailVM.price!.current - portfolioLocalStorageList[row].avgCost) * Double(portfolioLocalStorageList[row].numOfShares), specifier: "%.2f")").padding(.bottom, 3)
-                        Text("**Market Value:** $\(self.companyDetailVM.price!.current * Double(portfolioLocalStorageList[row].numOfShares), specifier: "%.2f")").padding(.bottom, 3)
+                        let sharesOwned = portfolioLocalStorageList[row].numOfShares
+                        let avgCost = portfolioLocalStorageList[row].avgCost
+                        let totalCost = portfolioLocalStorageList[row].avgCost * Double(portfolioLocalStorageList[row].numOfShares)
+                        let change = changeInPriceFromTotal(latest: self.companyDetailVM.price!.current, avgCost: portfolioLocalStorageList[row].avgCost, numOfShares: portfolioLocalStorageList[row].numOfShares)
+                        let marketValue = marketValue(latest: self.companyDetailVM.price!.current, numOfShares: portfolioLocalStorageList[row].numOfShares)
+                        Text("**Shares Owned**: \(sharesOwned)").padding(.bottom, 3)
+                        Text("**Avg. Cost / Share:** $\(avgCost, specifier: "%.2f")").padding(.bottom, 3)
+                        Text("**Total Cost**: $\(totalCost, specifier: "%.2f")").padding(.bottom, 3)
+                        Group {
+                            Text("**Change**: ") + Text("$\(change, specifier: "%.2f")").foregroundColor(change == 0 ? .secondary : (change > 0 ? .green : .red))
+                        }.padding(.bottom, 3)
+                        Group {
+                            Text("**Market Value:** ") + Text("$\(marketValue, specifier: "%.2f")").foregroundColor(change == 0 ? .secondary : (change > 0 ? .green : .red))
+                        }.padding(.bottom, 3)
                         
                     } else {
                         Text("Your have 0 shares of \(self.ticker).")
@@ -51,6 +61,7 @@ struct Portfolio: View {
         }
         .sheet(isPresented: $isShowingSheet) {
             TradeSheet()
+                .font(.callout)
         }
     }
 }

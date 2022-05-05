@@ -4,6 +4,7 @@
 //
 //  Created by Kai Wang on 4/20/22.
 //
+// reference: https://developer.apple.com/forums/thread/126986
 
 import Foundation
 import SwiftUI

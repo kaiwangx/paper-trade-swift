@@ -16,12 +16,15 @@
 <script>
     // loadHighChart('TSLA', 'http://localhost:8080')
     async function loadHighChart(ticker, url) {
-        const lastTimeStamp = await fetch(`${url}/latest_price/${ticker}`)
-            .then(response => response.json())
-            .then(response => {return response["t"]})
+        const latest_price = await fetch(`${url}/latest_price/${ticker}`)
+            .then(response => {
+                return response.json()
+            })
+        const lastTimeStamp = latest_price["t"]
         const t = dayjs.unix(lastTimeStamp)
         const f = t.subtract(6, 'hour').unix()
         url = `${url}/historical_data/${ticker}/5/${f}/${t.unix()}`
+
 
         console.log(url)
         fetch(url, {method: 'GET'})
@@ -40,9 +43,9 @@
                 }
 
                 let color = 'gray'
-                if (open[0] - prices[dataLength - 1] > 0) {
+                if (latest_price["dp"] < 0) {
                     color = 'red'
-                } else if (open[0] - prices[dataLength - 1] < 0) {
+                } else if (latest_price["dp"] > 0) {
                     color = 'green'
                 }
 

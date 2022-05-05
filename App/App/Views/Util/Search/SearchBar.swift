@@ -4,6 +4,7 @@
 //
 //  Created by Kai Wang on 4/20/22.
 //
+// reference: http://blog.eppz.eu/swiftui-search-bar-in-the-navigation-bar/
 
 import SwiftUI
 class SearchBar: NSObject, ObservableObject {
@@ -20,14 +21,10 @@ class SearchBar: NSObject, ObservableObject {
 extension SearchBar: UISearchResultsUpdating {
    
     func updateSearchResults(for searchController: UISearchController) {
-        let debouncer = Debouncer(delay: 1)
-        debouncer.run(action: {
-            // Publish search bar text changes.
-            if let searchBarText = searchController.searchBar.text {
-                self.text = searchBarText
-            }
-        })
-
+        // Publish search bar text changes.
+        if let searchBarText = searchController.searchBar.text {
+            self.text = searchBarText
+        }
     }
 }
 

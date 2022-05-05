@@ -13,7 +13,7 @@ struct Stats: View {
         VStack(alignment: .leading){
             HStack{
                 Text("Stats")
-                    .font(.title)
+                    .font(.system(size: 25.0))
                     .padding(.bottom, 5)
             }
             HStack {

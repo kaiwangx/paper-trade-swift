@@ -9,7 +9,23 @@ import SwiftUI
 
 struct PortfolioRow: View {
     var portfolioItem: TickerRowItem
+    var changeInPrice: Double
+    var changeInPricePercentage: Double
+    var trend: Trend
     
+    init(portfolioItem: TickerRowItem) {
+        self.portfolioItem = portfolioItem
+        self.changeInPrice = changeInPriceFromTotal(latest: portfolioItem.price.current, avgCost:portfolioItem.portfolioLocalStorageItem.avgCost, numOfShares: portfolioItem.portfolioLocalStorageItem.numOfShares)
+        self.changeInPricePercentage = changeInPriceFromTotalPercentage(latest: portfolioItem.price.current, avgCost:portfolioItem.portfolioLocalStorageItem.avgCost, numOfShares: portfolioItem.portfolioLocalStorageItem.numOfShares)
+        if self.changeInPricePercentage > 0 {
+            self.trend = Trend(color: Color.green, img:Image(systemName: "arrow.up.forward"))
+        } else if self.changeInPricePercentage < 0 {
+            self.trend = Trend(color:Color.red, img:Image(systemName: "arrow.down.forward"))
+        } else {
+            self.trend = Trend(color:Color.gray, img:Image(systemName: "minus"))
+        }
+    }
+                                                                   
     var body: some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading) {
@@ -21,14 +37,15 @@ struct PortfolioRow: View {
             }
             Spacer()
             VStack(alignment: .trailing) {
-                Text("$\(self.portfolioItem.price.current, specifier: "%.2f")")
+                Text("$\(marketValue(latest: portfolioItem.price.current, numOfShares: portfolioItem.portfolioLocalStorageItem.numOfShares), specifier: "%.2f")")
                     .font(.headline)
                     .fontWeight(.semibold)
                 HStack {
-                    self.portfolioItem.price.trend.img
-                    Text("$\(self.portfolioItem.price.change, specifier: "%.2f") (\(self.portfolioItem.price.percentageChange, specifier: "%.2f")%)")
+                    self.trend.img
+
+                    Text("$\(self.changeInPrice, specifier: "%.2f") (\(self.changeInPricePercentage, specifier: "%.2f")%)")
                 }
-                .foregroundColor(self.portfolioItem.price.trend.color)
+                .foregroundColor(self.trend.color)
             }
         }
     }

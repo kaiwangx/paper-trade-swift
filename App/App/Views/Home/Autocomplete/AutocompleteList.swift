@@ -17,13 +17,13 @@ struct AutocompleteList: View {
                 } label: {
                     VStack(alignment: .leading) {
                         Text(option.symbol)
-                            .font(.title)
+                            .font(.title2)
+                            .fontWeight(.bold)
                         Text(option.description)
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
                 }
-                
             }
         }
     }

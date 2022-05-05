@@ -11,7 +11,8 @@ import SwiftyJSON
 import SwiftUI
 
 class CompanyDetailVM: ObservableObject {
-    @Published var isLoading: Bool = true
+    let numFetches = 5
+    @Published var numCompletedFetched = 0
     @Published var description: CompanyDescription?
     @Published var price: TickerLastPrice?
     @Published var peers: [String]?
@@ -19,7 +20,6 @@ class CompanyDetailVM: ObservableObject {
     @Published var newsList: [NewsItem]?
     
     init(_ ticker: String) {
-        print("new ticker search of \(ticker)")
         self.fetchCompanyDescription(ticker)
         self.fetchCompanyPrice(ticker)
         self.fetchPeers(ticker)
@@ -32,7 +32,7 @@ class CompanyDetailVM: ObservableObject {
             switch response.result {
             case let .success(data):
                 self.description = data
-                self.updateLoadingState()
+                self.numCompletedFetched += 1
             case let .failure(error):
                 print("Error: \(error.localizedDescription)")
             }
@@ -44,7 +44,7 @@ class CompanyDetailVM: ObservableObject {
             switch response.result {
             case let .success(data):
                 self.price = data
-                self.updateLoadingState()
+                self.numCompletedFetched += 1
             case let .failure(error):
                 print("Error: \(error.localizedDescription)")
             }
@@ -56,7 +56,7 @@ class CompanyDetailVM: ObservableObject {
             switch response.result {
             case let .success(data):
                 self.peers = data
-                self.updateLoadingState()
+                self.numCompletedFetched += 1
             case let .failure(error):
                 print("Error: \(error.localizedDescription)")
             }
@@ -68,7 +68,7 @@ class CompanyDetailVM: ObservableObject {
             switch response.result {
             case let .success(data):
                 self.socialSentiment = data
-                self.updateLoadingState()
+                self.numCompletedFetched += 1
             case let .failure(error):
                 print("Error: \(error.localizedDescription)")
             }
@@ -85,21 +85,10 @@ class CompanyDetailVM: ObservableObject {
             case let .success(data):
             let filterNews: [NewsItem] = data.filter({$0.source != "" && $0.image != "" && $0.datetime != 0 && $0.headline != "" && $0.summary != ""  && $0.url != ""})
                 self.newsList = filterNews
-                self.updateLoadingState()
+                self.numCompletedFetched += 1
             case let .failure(error):
                 print("Error: \(error.localizedDescription)")
             }
-        }
-    }
-
-    
-    func updateLoadingState() {
-        if self.description != nil &&
-            self.price != nil &&
-            self.peers != nil &&
-            self.socialSentiment != nil &&
-            self.newsList != nil {
-            self.isLoading = false
         }
     }
 }

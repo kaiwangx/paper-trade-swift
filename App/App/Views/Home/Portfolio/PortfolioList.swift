@@ -10,8 +10,7 @@ import SwiftUI
 struct PortfolioList: View {
     @AppStorage("portfolio") var portfolioLocalStorageList: [TickerLocalStorageItem] = []
     @AppStorage("balance") var balance = 25000.00
-    @ObservedObject var tickerAutoUpdateVM: TickerAutoUpdateListVM = TickerAutoUpdateListVM()
-    var testList = ["1", "2", "3"]
+    @ObservedObject var tickerAutoUpdateVM: TickerAutoUpdateDictVM = TickerAutoUpdateDictVM()
     
     init() {
         self.tickerAutoUpdateVM.set(self.portfolioLocalStorageList)
@@ -23,7 +22,7 @@ struct PortfolioList: View {
             HStack {
                 VStack(alignment: .leading) {
                     Text("Net Worth")
-                    Text("\(self.tickerAutoUpdateVM.netWorth + self.balance, specifier: "%.2f")")
+                    Text("$\(self.tickerAutoUpdateVM.netWorth + self.balance, specifier: "%.2f")")
                         .fontWeight(.bold)
                 }
                 Spacer()
@@ -39,20 +38,32 @@ struct PortfolioList: View {
                 self.balance = 25000.00
                 self.portfolioLocalStorageList.removeAll()
             }
+//
+//            Button("Check Local Storage") {
+//                print(self.portfolioLocalStorageList)
+//            }
             
-            ForEach(tickerAutoUpdateVM.tickerList) { item in
+            ForEach(portfolioLocalStorageList) { item in
                 NavigationLink {
-                    LazyView(CompanyDetail(ticker: item.portfolioLocalStorageItem.ticker))
+                    LazyView(CompanyDetail(ticker: item.ticker))
                 } label: {
-                    PortfolioRow(portfolioItem: item)
+                    if tickerAutoUpdateVM.tickerDict[item.ticker] != nil {
+                        PortfolioRow(portfolioItem: tickerAutoUpdateVM.tickerDict[item.ticker]!)
+                    }
                 }
             }
+            .onMove(perform: move)
             .onChange(of: portfolioLocalStorageList) { newPortfolioLocalStorageList in
                 self.tickerAutoUpdateVM.set(self.portfolioLocalStorageList)
             }
         } header: {
             Text("PORTFOLIO")
         }
+    }
+    
+    
+    func move(from source: IndexSet, to destination: Int) {
+        portfolioLocalStorageList.move(fromOffsets: source, toOffset: destination)
     }
 }
 
