@@ -17,9 +17,7 @@ See demo below
 <a name="tech-stack"/>
 Languages: Swift, JavaScript, HTML
 
-Toolkit: SwiftUI
-
-Frameworks: Express.js
+Toolkit & Frameworks: SwiftUI, Express.js
 
 Libraries: Highcharts stock, Alamofire, Kingfisher, SwiftyJSON, SF Symbol
 
