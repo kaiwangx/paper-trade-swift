@@ -3,7 +3,7 @@
 ## Table of Contents  
 [Description](#description)    
 [Tech Stack](#tech-stack) 
-[Demo] (#demo)
+[Demo](#demo)
 
 ## Description
 <a name="description"/>
@@ -29,15 +29,21 @@ Cloud Services: Google Cloud
 <a name="demo">
 
 ### App
-![alt text](https://github.com/kaiwangx/paper-trade-swift/blob/master/demo/app.gif)
+  ![alt text](https://github.com/kaiwangx/paper-trade-swift/blob/main/demo/app.gif)
 
 ### Auto-complete
+  ![alt text](https://github.com/kaiwangx/paper-trade-swift/blob/main/demo/autocomplete.gif)
 
-### Stock search
+### Stock search result
+  ![alt text](https://github.com/kaiwangx/paper-trade-swift/blob/main/demo/chart.gif)
+  ![alt text](https://github.com/kaiwangx/paper-trade-swift/blob/main/demo/search-result-1.gif)
+  ![alt text](https://github.com/kaiwangx/paper-trade-swift/blob/main/demo/search-result-2.gif)
+  ![alt text](https://github.com/kaiwangx/paper-trade-swift/blob/main/demo/search-result-3.gif)
+  ![alt text](https://github.com/kaiwangx/paper-trade-swift/blob/main/demo/news.gif)
 
-### Watchlist
+### Adding to Watchlist
 
-### Portfolio
+### Buy/Sell stock
 
 ### Transaction simulator
 
