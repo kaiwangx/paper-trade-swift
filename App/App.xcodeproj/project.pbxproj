@@ -22,6 +22,7 @@
 		2A0FAA65282217AB0065BA4F /* PriceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0FAA64282217AB0065BA4F /* PriceUtil.swift */; };
 		2A3691A6281216A100680720 /* CompanyNewsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3691A5281216A100680720 /* CompanyNewsSheet.swift */; };
 		2A3691AA28123E8A00680720 /* SelectedNewsItemVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3691A928123E8A00680720 /* SelectedNewsItemVM.swift */; };
+		2A45CD372823A7820001500F /* AppStorageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A45CD362823A7820001500F /* AppStorageList.swift */; };
 		2A4CA9012813CE07005D8E7B /* TradeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4CA9002813CE07005D8E7B /* TradeSheet.swift */; };
 		2A5490FE28149C870002F25C /* TradeCompleteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5490FD28149C870002F25C /* TradeCompleteSheet.swift */; };
 		2A935C8928111C5D00BEB01D /* PaperTradeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A935C8828111C5D00BEB01D /* PaperTradeApp.swift */; };
@@ -97,6 +98,7 @@
 		2A0FAA64282217AB0065BA4F /* PriceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceUtil.swift; sourceTree = "<group>"; };
 		2A3691A5281216A100680720 /* CompanyNewsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyNewsSheet.swift; sourceTree = "<group>"; };
 		2A3691A928123E8A00680720 /* SelectedNewsItemVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedNewsItemVM.swift; sourceTree = "<group>"; };
+		2A45CD362823A7820001500F /* AppStorageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageList.swift; sourceTree = "<group>"; };
 		2A4CA9002813CE07005D8E7B /* TradeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeSheet.swift; sourceTree = "<group>"; };
 		2A5490FD28149C870002F25C /* TradeCompleteSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeCompleteSheet.swift; sourceTree = "<group>"; };
 		2A935C8528111C5D00BEB01D /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -361,6 +363,7 @@
 				2A0FAA592820E9660065BA4F /* Toast.swift */,
 				2A0FAA602821CE5E0065BA4F /* Debouncer.swift */,
 				2A0FAA64282217AB0065BA4F /* PriceUtil.swift */,
+				2A45CD362823A7820001500F /* AppStorageList.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				2A935CC028111D1600BEB01D /* TickerAutoCompleteVM.swift in Sources */,
 				2A935CB928111CC300BEB01D /* TickerLastPrice.swift in Sources */,
 				2A0FAA4D281FAE450065BA4F /* Today.swift in Sources */,
+				2A45CD372823A7820001500F /* AppStorageList.swift in Sources */,
 				2A935CB728111CA600BEB01D /* CompanyDescription.swift in Sources */,
 				2A935D002811249600BEB01D /* CompanyNews.swift in Sources */,
 				2A935CB328111C7800BEB01D /* env.swift in Sources */,

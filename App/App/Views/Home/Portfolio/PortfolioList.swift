@@ -38,7 +38,7 @@ struct PortfolioList: View {
                 self.balance = 25000.00
                 self.portfolioLocalStorageList.removeAll()
             }
-//
+
 //            Button("Check Local Storage") {
 //                print(self.portfolioLocalStorageList)
 //            }
@@ -64,25 +64,5 @@ struct PortfolioList: View {
     
     func move(from source: IndexSet, to destination: Int) {
         portfolioLocalStorageList.move(fromOffsets: source, toOffset: destination)
-    }
-}
-
-extension Array: RawRepresentable where Element: Codable {
-    public init?(rawValue: String) {
-        guard let data = rawValue.data(using: .utf8),
-              let result = try? JSONDecoder().decode([Element].self, from: data)
-        else {
-            return nil
-        }
-        self = result
-    }
-
-    public var rawValue: String {
-        guard let data = try? JSONEncoder().encode(self),
-              let result = String(data: data, encoding: .utf8)
-        else {
-            return "[]"
-        }
-        return result
     }
 }

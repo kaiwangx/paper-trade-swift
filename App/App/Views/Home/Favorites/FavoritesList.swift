@@ -20,6 +20,7 @@ struct FavoritesList: View {
         
         
         Section {
+// for test purpose
 //            VStack {
 //                Button("Check local storage") {
 //                    print(self.favoritesLocalStorageList)
@@ -33,7 +34,7 @@ struct FavoritesList: View {
 //            }
 
             if (tickerAutoUpdateVM.tickerDict.count == 0) {
-//                Text("Your favorites list is empty")
+//                Text("Your favorites list i2s empty")
             } else {
                 ForEach(favoritesLocalStorageList) { item in
                     NavigationLink {
