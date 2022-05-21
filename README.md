@@ -27,6 +27,8 @@ Cloud Services: Google Cloud
 
 ## Demo
 <a name="demo">
-https://github.com/kaiwangx/paper-trade-swift/blob/main/demo/demo.mov
+https://user-images.githubusercontent.com/36971975/169665446-e3c4c741-f408-467a-b1ba-ae6d5bb074be.mov
+
+
 
 
