@@ -34,10 +34,10 @@ struct PortfolioList: View {
             }
             .font(.title3)
             
-            Button("Reset") {
-                self.balance = 25000.00
-                self.portfolioLocalStorageList.removeAll()
-            }
+//            Button("Reset") {
+//                self.balance = 25000.00
+//                self.portfolioLocalStorageList.removeAll()
+//            }
 
 //            Button("Check Local Storage") {
 //                print(self.portfolioLocalStorageList)
