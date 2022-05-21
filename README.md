@@ -1,8 +1,10 @@
 # paper-trade-swift
 
 ## Table of Contents  
-[Description](#description)    
+[Description](#description)  
+
 [Tech Stack](#tech-stack) 
+
 [Demo](#demo)
 
 ## Description
@@ -27,11 +29,5 @@ Cloud Services: Google Cloud
 
 ## Demo
 <a name="demo">
-
-
-
-
-
-
-https://user-images.githubusercontent.com/36971975/169665629-98a7050c-6676-4ea9-bfa3-4d2dd47660c9.mp4
+https://user-images.githubusercontent.com/58986949/115314310-805b2780-a1a7-11eb-8558-648a367ea231.mp4
 
