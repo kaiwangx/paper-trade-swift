@@ -1,11 +1,10 @@
 # paper-trade-swift
+https://user-images.githubusercontent.com/36971975/169665769-2b8713b2-0c64-4788-9b7a-d123cc709c70.mov
 
 ## Table of Contents  
 [Description](#description)  
 
 [Tech Stack](#tech-stack) 
-
-[Demo](#demo)
 
 ## Description
 <a name="description"/>
@@ -27,7 +26,4 @@ APIs: Finnhub
 
 Cloud Services: Google Cloud
 
-## Demo
-<a name="demo">
-https://user-images.githubusercontent.com/58986949/115314310-805b2780-a1a7-11eb-8558-648a367ea231.mp4
 
