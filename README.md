@@ -1,5 +1,9 @@
 # paper-trade-swift
-https://user-images.githubusercontent.com/36971975/169665769-2b8713b2-0c64-4788-9b7a-d123cc709c70.mov
+
+
+https://user-images.githubusercontent.com/36971975/171564703-1473aa64-16e8-4f4d-a777-08fdf3d0d631.mov
+
+
 
 ## Table of Contents  
 [Description](#description)  
